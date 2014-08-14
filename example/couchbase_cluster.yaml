@@ -1,0 +1,8 @@
+serverList:
+  - host: "127.0.0.1"
+    port: "8091"
+
+bucketList:
+  - bucketName: "testBucket"
+    password: ""
+    bucketType: "couchbase"

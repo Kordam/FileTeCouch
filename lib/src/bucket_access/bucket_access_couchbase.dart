@@ -89,8 +89,23 @@ class BucketAccessCouchbase extends ABucketAccess {
   
   
   
-  
-  
+  /**
+   * Send a query to Couchbase Server for custom map/reduce algorythms
+   */
+  Future getView(String designDocumentName, String viewName, DBQuery query) {
+    return CouchbaseCluster.connect(bucket)
+                  .then( (CouchClient client) {
+                    return client.getView(designDocumentName, viewName)
+                        .then( (View view) {
+                          Query query = new Query();
+                          return client.query(view, query)
+                              .then( (results) {
+                                client.close();
+                                return (ViewObject.entriesToViewObject(view.bucketName, results.rows));
+                              });
+                        });
+                  });
+  }
   
   
 }

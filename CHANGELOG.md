@@ -6,3 +6,4 @@
 	* Basic request : get/set/delete + increment/decrement
 	* Support Couchbase Buckets
 	* Examples
+ 

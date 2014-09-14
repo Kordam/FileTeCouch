@@ -3,7 +3,7 @@
 FileTeCouch is a client SDK, based on CouchClient and MemcachedClient, developed and maintain by Rikulo guys.
 It enables you to access to the Couchbase Server database using Dart Lang (developed by Google).
 
-* Developed for the Kordam project
+- Developed for the Kordam project
 
 * [Home](http://kordam.fr)
 * [Discussion](http://stackoverflow.com/questions/tagged/kordam)

@@ -41,7 +41,7 @@ class DBObject {
     ret += "{";
     ret += "key=" + (key != null ? "\"" + key + "\"" : "null");
     ret += ", ";
-    ret += "value=" + (value != null ? "\"" + value + "\"" : "null");
+    ret += "value=" + (value != null ? "\"" + value.toString() + "\"" : "null");
     ret += ", ";
     ret += "ttl=" + (ttl != null ? "\"" + ttl.toString() + "\"" : "unlimited");
     ret += ", ";

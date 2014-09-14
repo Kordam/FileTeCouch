@@ -15,6 +15,8 @@ abstract class ABucketAccess {
   Future increment(DBObject obj);
   Future decrement(DBObject obj);
   
+  Future getView(String designDocumentName, String viewName, DBQuery query);
+  
 }
 
 

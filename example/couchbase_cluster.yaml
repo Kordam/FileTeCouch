@@ -3,6 +3,9 @@ serverList:
     port: "8091"
 
 bucketList:
-  - bucketName: "testBucket"
+  - bucketName: "default"
+    password: ""
+    bucketType: "couchbase"
+  - bucketName: "beer-sample"
     password: ""
     bucketType: "couchbase"

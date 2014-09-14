@@ -30,6 +30,10 @@ part 'src/bucket_access/bucket_access.dart';
 part 'src/bucket_access/bucket_access_couchbase.dart';
 part "src/bucket_access/bucket_access_memcached.dart";
 
+// I/O views object
+part "src/views/db_query.dart";
+part "src/views/view_object.dart";
+
 // I/O object
 part "src/db_object/db_object.dart";
 part 'src/db_object/db_object_id.dart';

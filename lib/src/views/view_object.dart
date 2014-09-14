@@ -65,7 +65,11 @@ class ViewObject {
     }
       
     FileTeCouch bucket = new FileTeCouch(bucketName);
-    return bucket.get(id);
+    return bucket.get(id)
+        .then((DBObject val) {
+          doc = val;
+          return val;
+        });
   }
   
 }

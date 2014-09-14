@@ -1,11 +1,15 @@
 serverList:
   - host: "127.0.0.1"
-    port: "8091"
+    portCouchbase: "8091"
+    portMemcached: "11211"
 
 bucketList:
   - bucketName: "default"
     password: ""
     bucketType: "couchbase"
+  - bucketName: "test_cache"
+    password: ""
+    bucketType: "memcached"
   - bucketName: "beer-sample"
     password: ""
     bucketType: "couchbase"

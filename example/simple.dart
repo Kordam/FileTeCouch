@@ -8,9 +8,9 @@ import "package:FileTeCouch/FileTeCouch.dart";
 void simple_setAndGet(FileTeCouch testBucket) {
   DBObject objSet0 = new DBObject("simple_setAndGet0", "simple_value0");
   
-  testBucket.set(objSet0).then( (DBObject val) {
-    testBucket.get(val.key).then( (DBObject val) {
-      print(val.value);
+  testBucket.set(objSet0).then( (DBObject val1) {
+    testBucket.get(val1.key).then( (DBObject val2) {
+      print(val2.value);
     });
   });
 }

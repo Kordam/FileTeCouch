@@ -17,8 +17,7 @@ class FileTeCouch {
     if (_bucketType == "couchbase")
       _bucketAccess = new BucketAccessCouchbase(bucket);
     else if (_bucketType == "memcached")
-      throw "Memcached bucket not supported yet.";
-//      _bucketAccess = new BucketAccessMemcached(bucket);
+      _bucketAccess = new BucketAccessMemcached(bucket);
   }
   
   

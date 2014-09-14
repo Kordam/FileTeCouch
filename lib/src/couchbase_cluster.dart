@@ -1,10 +1,15 @@
 part of FileTeCouch;
 
+
 class CouchbaseCluster {
   
   static bool                 ready = false;
   
-  static List<Uri>            _listServers = new List();
+  static int                  _portCouchbase = 8091;
+  static int                  _portMemcached = 11211;
+  
+  static List<Uri>            _listServersCouchbase = new List();
+  static List<SocketAddress>  _listServersMemcached = new List();
   static Map<String, Map<String, String>>  _listBuckets = new Map<String, Map<String, String>>();
   
 
@@ -37,10 +42,11 @@ class CouchbaseCluster {
     // parse servers host and port
     list['serverList'].forEach((server) {
       if (server["host"] == null || server["host"] is String == false
-       || server["port"] == null || (server["port"] is String == false && server["port"] is int == false))
+          || server["portCouchbase"] == null || (server["portCouchbase"] is String == false && server["portCouchbase"] is int == false)
+          || server["portMemcached"] == null || (server["portMemcached"] is String == false && server["portMemcached"] is int == false))
         throw "Bad couchbase configuration file - \"" + server.toString() + "\" is invalid";
       
-      _addServer(server["host"], server["port"].toString());
+      _addServer(server["host"], server["portCouchbase"].toString(), server["portMemcached"].toString());
     });
     
     // parse buckets name and password
@@ -55,9 +61,16 @@ class CouchbaseCluster {
   }
 
   // add a server in the _listServers attribute
-  static void _addServer(String host, String port) {
-    String hostname = "http://" + host + ":" + port + "/pools";
-    _listServers.add(Uri.parse(hostname));
+  static void _addServer(String host, String portCouchbase, String portMemcached) {
+    _portCouchbase = int.parse(portCouchbase);
+    _portMemcached = int.parse(portMemcached);
+    
+    // + Couchbase
+    String hostnameCouchbase = "http://" + host + ":" + portCouchbase + "/pools";
+    _listServersCouchbase.add(Uri.parse(hostnameCouchbase));
+    
+    // + Memcached
+    _listServersMemcached.add(new SocketAddress(host, _portMemcached));
   }
 
   // add a bucket in the _listBuckets attribute
@@ -89,12 +102,11 @@ class CouchbaseCluster {
   }
   
   static Future _connectCouchbaseBucket(String bucket) {
-    return (CouchClient.connect(_listServers, bucket, _listBuckets[bucket]["password"]));
+    return (CouchClient.connect(_listServersCouchbase, bucket, _listBuckets[bucket]["password"]));
   }
   static Future _connectMemcachedBucket(String bucket) {
-    // @todo
+    return (MemcachedClient.connect(_listServersMemcached));
   }
-  
   
   
   

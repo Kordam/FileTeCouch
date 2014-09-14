@@ -31,5 +31,9 @@ class BucketAccessMemcached extends ABucketAccess {
 //  Future decrement(String Key) {
 //    
 //  }
+//  
+//  Future getView(String designDocumentName, String viewName, DBQuery query) {
+//    
+//  }
   
 }

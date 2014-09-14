@@ -1,5 +1,5 @@
 name: FileTeCouch
-version: 0.1.0
+version: 0.2.0
 author: Samuel BERTHE <contact@samuel-berthe.fr>
 description: A Couchbase Server client library, based on CouchClient (Rikulo team), written in Dart language, for the Kordam project.
 homepage: https://github.com/Kordam/FileTeCouch

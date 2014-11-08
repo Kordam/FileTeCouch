@@ -5,7 +5,7 @@ class DBObject {
   String  key = null;
   Object  value = null;
   int     revision = null;
-  int     _ttl = null;		// write only
+  int     ttl = null;
   
   /**
    * Readable/writable object in Couchbase Server
@@ -24,7 +24,7 @@ class DBObject {
     
     value = dbValue;
     
-    _ttl = dbTtl;
+    ttl = dbTtl;
     revision = dbRevision;
   }
   

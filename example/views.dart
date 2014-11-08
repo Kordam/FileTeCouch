@@ -41,10 +41,10 @@ void views_getViewTheGetDocument(FileTeCouch beerBucket) {
  */
 void views_getViewByQuery(FileTeCouch beerBucket) {
   DBQuery query = new DBQuery();
-  query.skip(10);
-  query.limit(10);
+  query.skip = 10;
+  query.limit = 10;
   query.includeDocs = true;
-  query.reduce(false);
+  query.reduce = false;
   
   beerBucket.getViewByQuery("beer", "brewery_beers", query).then( (List<ViewObject> val) {
     for (ViewObject item in val)

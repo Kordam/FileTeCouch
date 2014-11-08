@@ -97,6 +97,8 @@ class BucketAccessCouchbase extends ABucketAccess {
                   .then( (CouchClient client) {
                     return client.getView(designDocumentName, viewName)
                         .then( (View view) {
+                          if (view == null)
+                            throw "Unknown view";
                           Query query = new Query();
                           return client.query(view, query)
                               .then( (results) {

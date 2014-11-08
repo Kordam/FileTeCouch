@@ -96,7 +96,7 @@ class FileTeCouch {
     // to retrieve the attached doc at the same time
     query.includeDocs = true;
     // filter by key (first emit argument)
-    query.key(JSON.encode(key));
+    query.key = JSON.encode(key);
     return getViewByQuery(designDocumentName, viewName, query)
         .then( (List<ViewObject> obj) {
           List<DBObject> ret = new List<DBObject>();
@@ -111,7 +111,7 @@ class FileTeCouch {
    * Query a view with up-to-date view cache
    */
   Future getConsistentViewByQuery(String designDocumentName, String viewName, DBQuery query) {
-    query.stale(Stale.FALSE);
+    query.stale = Stale.FALSE;
     return getViewByQuery(designDocumentName, viewName, query);
   }
   

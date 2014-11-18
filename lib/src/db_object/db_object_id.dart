@@ -15,10 +15,10 @@ class DBObjectId {
   
   String _id = null;
   
-  DBObjectId({String key}) {
+  DBObjectId({String prefix}) {
     _id = "";
-    if (key != null)
-      _id = key + "_";
+    if (prefix != null)
+      _id = prefix + "_";
     else {
       // + UUID
       _id += DBObjectIdVar.UUID;

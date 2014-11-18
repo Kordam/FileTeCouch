@@ -36,17 +36,17 @@ class BucketAccessMemcached extends ABucketAccess {
           .then(DBObject.entryToDBObject);
   }
   
-  Future getAll(String key) {
+  Future getAll(List<String> keys) {
     return CouchbaseCluster.connect(bucket)
       .then( (MemcachedClient client) {
-        return client.gets(key)
-            .then( (GetResult val) {
+        return client.getsAll(keys).toList()
+            .then( (List<GetResult> val) {
               client.close();
               return val;
             });
       })
       
-      .then(DBObject.entryToDBObject);
+      .then(DBObject.entriesToDBObject);
   }
   
   Future delete(String key) {

@@ -1,0 +1,6 @@
+serverList:
+
+bucketList:
+  - bucketName: "default"
+    password: ""
+    bucketType: "couchbase"

@@ -51,7 +51,7 @@ class DBObject {
     ret += ", ";
     ret += "value=" + (value != null ? "\"" + value.toString() + "\"" : "null");
     ret += ", ";
-    ret += "_ttl=" + (_ttl != null ? "\"" + _ttl.toString() + "\"" : "unlimited");
+    ret += "_ttl=" + (ttl != null ? "\"" + ttl.toString() + "\"" : "unlimited");
     ret += ", ";
     ret += "revision=" + (revision != null ? "\"" + revision.toString() + "\"" : "null");
     ret += "}";

@@ -1,0 +1,9 @@
+serverList:
+  - host: "127.0.0.1"
+    portCouchbase: "8091"
+    portMemcached: "11211"
+
+bucketList:
+  - bucketName: "default"
+    password: 42
+    bucketType: "couchbase"

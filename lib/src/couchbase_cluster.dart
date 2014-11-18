@@ -52,7 +52,8 @@ class CouchbaseCluster {
     // parse buckets name and password
     list['bucketList'].forEach((bucket) {
       if (bucket["bucketName"] == null || bucket["bucketName"] is String == false
-       || bucket["password"] == null || bucket["password"] is String == false
+          || bucket["password"] == null || bucket["password"] is String == false
+          || bucket["bucketType"] == null || bucket["bucketType"] is String == false
        || (bucket["bucketType"] != null && bucket["bucketType"] != "couchbase" && bucket["bucketType"] != "memcached"))
         throw "Bad couchbase configuration file - \"" + bucket.toString() + "\" is invalid";
       
@@ -91,11 +92,8 @@ class CouchbaseCluster {
   
   
   static Future connect(String bucket) {
-    if (_listBuckets[bucket] == null) {
-      return new Future( () {
-        throw "\"" + bucket + "\": unkown bucket";
-      });
-    }
+    if (_listBuckets[bucket] == null)
+      throw "\"" + bucket + "\": unkown bucket";
     if (_listBuckets[bucket]["bucketType"] == "memcached")
       return _connectMemcachedBucket(bucket);
     return _connectCouchbaseBucket(bucket);

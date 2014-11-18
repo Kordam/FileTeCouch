@@ -10,3 +10,6 @@ bucketList:
   - bucketName: "beer-sample"
     password: ""
     bucketType: "couchbase"
+  - bucketName: "memcached-unitTest"
+    password: ""
+    bucketType: "memcached"

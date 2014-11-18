@@ -48,19 +48,74 @@ void test_couchbase_get() {
 }
 
 void test_couchbase_getAll() {
-  
-}
+  CouchbaseCluster.init("config/test_couchbase_cluster.yaml");
+  FileTeCouch testBucket = new FileTeCouch("default");
 
-void test_couchbase_delete() {
-  
+  test("GetAll", () {
+    DBObject set0 = new DBObject("set0", "value0");
+    DBObject set1 = new DBObject("set1", "value1");
+    testBucket.set(set0).then( (DBObject ret) {
+      return testBucket.set(set1);
+    }).then( (_) {
+      testBucket.getAll([set0.key, set1.key]).then( (List<DBObject> ret) {
+        expectAsync( (_) {
+          expect(ret[0].key, equals(set0.key));
+          expect(ret[0].value, equals(set0.value));
+          expect(ret[1].key, equals(set1.key));
+          expect(ret[1].value, equals(set1.value));
+        });
+      });
+    });
+  });  
 }
 
 void test_couchbase_increment() {
-  
+  CouchbaseCluster.init("config/test_couchbase_cluster.yaml");
+  FileTeCouch testBucket = new FileTeCouch("default");
+
+  test("Increment", () {
+    DBObject set0 = new DBObject("set0", 42);
+    testBucket.set(set0).then( (DBObject ret) {
+      testBucket.increment(new DBObject(set0.key, 1)).then( (DBObject ret) {
+        expectAsync( (_) {
+          expect(ret.key, equals(set0.key));
+          expect(ret.value, equals(set0.value + 1));
+        });
+      });
+    });
+  });
 }
 
 void test_couchbase_decrement() {
-  
+  CouchbaseCluster.init("config/test_couchbase_cluster.yaml");
+  FileTeCouch testBucket = new FileTeCouch("default");
+
+  test("Decrement", () {
+    DBObject set0 = new DBObject("set0", 42);
+    testBucket.set(set0).then( (DBObject ret) {
+      testBucket.decrement(new DBObject(set0.key, 1)).then( (DBObject ret) {
+        expectAsync( (_) {
+          expect(ret.key, equals(set0.key));
+          expect(ret.value, equals(set0.value - 1));
+        });
+      });
+    });
+  });
+}
+
+void test_couchbase_delete() {
+  CouchbaseCluster.init("config/test_couchbase_cluster.yaml");
+  FileTeCouch testBucket = new FileTeCouch("default");
+
+  test("Delete", () {
+    testBucket.delete("set0").then( (DBObject ret) {
+      testBucket.get("set0").then( (DBObject ret) {
+        expectAsync( (_) {
+          expect(ret, isNull);
+        });
+      });
+    });
+  });
 }
 
 void test_couchbase_views() {

@@ -15,3 +15,7 @@
 	* Release 0.3.0
 	* Support Memcached Buckets
 	* Examples
+* November 19, 2014 - 2am
+	* Release 0.4.2
+	* Add unit tests
+	

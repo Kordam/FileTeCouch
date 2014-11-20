@@ -27,7 +27,7 @@ void test_couchbase_basic() {
   group('Basic Couchbase request tests =>', () {
 //    test_couchbase_set();
 //    test_couchbase_get();
-//    test_couchbase_getAll();
+    test_couchbase_getAll();
     test_couchbase_increment();
     test_couchbase_decrement();
     test_couchbase_delete();

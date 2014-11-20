@@ -24,7 +24,6 @@ class ViewObject {
     if (row == null)
       return null;
 
-print(row.toString());
     Object key = row.key == null ? null : (row.key is String ? row.key : JSON.decode(row.key));
     Object value = row.value == null ? null : (row.value is String ? row.value : JSON.decode(row.value));
     DBObject doc = row.doc == null ? null : new DBObject(row.id, JSON.decode(UTF8.decode(row.doc.data)), dbRevision: row.doc.cas);

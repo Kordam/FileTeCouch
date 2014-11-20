@@ -66,7 +66,7 @@ void test_couchbase_getAll() {
         });
       });
     });
-  });  
+  });
 }
 
 void test_couchbase_increment() {

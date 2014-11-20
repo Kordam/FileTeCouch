@@ -10,6 +10,9 @@ class FileTeCouch {
   FileTeCouch(bucket) {
     if (CouchbaseCluster.ready == false)
       throw "CouchbaseCluster isn't initialized. Call CouchbaseCluster.init('<Filename>.yaml')";
+
+    if (_bucketAccess != null)
+      return;
     
     _bucketName = bucket;
     _bucketType = CouchbaseCluster.getBucketType(bucket);

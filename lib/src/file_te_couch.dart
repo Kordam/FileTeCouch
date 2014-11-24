@@ -77,7 +77,7 @@ class FileTeCouch {
           || designDocumentName == "" || viewName == "")
           throw "FileTeCouch would like return you a result, but we cannot guess the design document name and the view name alone...";
         
-    if (viewName.substring(0, 4) == "dev_")
+    if (viewName.indexOf("dev_") == 0)
       print("FileTeCouch: You're using a view in development mode. Data are not exhaustive");
         
     return _bucketAccess.getView(designDocumentName, viewName, query);

@@ -1,11 +1,11 @@
 part of FileTeCouch;
 
 class FileTeCouch {
-  
+
   String          _bucketName = null;
   String          _bucketType = null;
   ABucketAccess   _bucketAccess = null;
-  
+
   // ctor
   FileTeCouch(bucket) {
     if (CouchbaseCluster.ready == false)
@@ -13,17 +13,17 @@ class FileTeCouch {
 
     if (_bucketAccess != null)
       return;
-    
+
     _bucketName = bucket;
     _bucketType = CouchbaseCluster.getBucketType(bucket);
-    
+
     if (_bucketType == "couchbase")
       _bucketAccess = new BucketAccessCouchbase(bucket);
     else if (_bucketType == "memcached")
       _bucketAccess = new BucketAccessMemcached(bucket);
   }
-  
-  
+
+
   /*
    * If [exptime] exceeds 30 days(30x24x60x60), it is
    *   deemed as an absolute date in seconds since epoch time.
@@ -33,21 +33,21 @@ class FileTeCouch {
   }
 
   Future get(String key) {
-    return _bucketAccess.get(key);    
+    return _bucketAccess.get(key);
   }
-  
+
   Future getAll(List<String> list) {
     return _bucketAccess.getAll(list);
   }
 
   Future delete(String key) {
-    return _bucketAccess.delete(key);    
+    return _bucketAccess.delete(key);
   }
 
-  
-  
+
+
   /*
-   * Increment and decrement are atomic operations : avoid to meet concurrency problems 
+   * Increment and decrement are atomic operations : avoid to meet concurrency problems
    */
   Future increment(DBObject obj) {
     if (obj.value is num == false)
@@ -59,16 +59,16 @@ class FileTeCouch {
       throw "FileTeCouch doesn't support this type to decrement a value.";
     return _bucketAccess.decrement(obj);
   }
-  
-  
-  
+
+
+
   /*********************************************************************************
    * Views can be associated to queries. More complex request than key/value storage
    * You can just perform the retrieve operation with a view.
    ********************************************************************************/
-  
-  
-  
+
+
+
   /**
    * Send a query to Couchbase Server for custom map/reduce algorythms
    */
@@ -76,13 +76,12 @@ class FileTeCouch {
     if (designDocumentName == null || viewName == null
           || designDocumentName == "" || viewName == "")
           throw "FileTeCouch would like return you a result, but we cannot guess the design document name and the view name alone...";
-        
+
     if (viewName.indexOf("dev_") == 0)
       print("FileTeCouch: You're using a view in development mode. Data are not exhaustive");
-        
     return _bucketAccess.getView(designDocumentName, viewName, query);
   }
-  
+
   /**
    * Request Couchbase Server to get map/reduce results. Use it carefully : without query, Couchbase Server would return a lot of data !
    * DEPRECATED
@@ -90,7 +89,7 @@ class FileTeCouch {
   Future getView(String designDocumentName, String viewName) {
     return getViewByQuery(designDocumentName, viewName, new DBQuery());
   }
-  
+
   /**
    * Return Couchbase Server document(s) filtering by key (first emit argument in a view)
    */
@@ -117,6 +116,6 @@ class FileTeCouch {
     query.stale = Stale.FALSE;
     return getViewByQuery(designDocumentName, viewName, query);
   }
-  
+
 }
 

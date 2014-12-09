@@ -1,7 +1,7 @@
 part of FileTeCouch;
 
 class BucketAccessCouchbase extends ABucketAccess {
-  
+
   BucketAccessCouchbase(String bucket) : super(bucket);
 
   Future set(DBObject object) {
@@ -19,7 +19,7 @@ class BucketAccessCouchbase extends ABucketAccess {
           .whenComplete(() => client.close());
     });
   }
-  
+
   Future get(String key) {
     return CouchbaseCluster.connect(bucket).then((CouchClient client) {
       return client.gets(key)
@@ -28,7 +28,7 @@ class BucketAccessCouchbase extends ABucketAccess {
       })
       .then(DBObject.entryToDBObject);
   }
-  
+
   Future getAll(List<String> keys) {
     return CouchbaseCluster.connect(bucket).then((CouchClient client) {
       return client.getsAll(keys).toList()
@@ -37,14 +37,14 @@ class BucketAccessCouchbase extends ABucketAccess {
     })
     .then(DBObject.entriesToDBObject);
   }
-  
+
   Future delete(String key) {
     return CouchbaseCluster.connect(bucket).then((CouchClient client) {
       return client.delete(key)
           .then((val) => val)
           .whenComplete(() => client.close());
     });
-  }  
+  }
 
   Future increment(DBObject obj) {
     return CouchbaseCluster.connect(bucket).then((CouchClient client) {
@@ -61,7 +61,7 @@ class BucketAccessCouchbase extends ABucketAccess {
         .whenComplete(() => client.close());
     });
   }
-  
+
   /**
    * Send a query to Couchbase Server for custom map/reduce algorythms
    */
@@ -71,12 +71,11 @@ class BucketAccessCouchbase extends ABucketAccess {
         if (view == null) {
           throw "Unknown view";
         }
-        Query query = new Query();
         return client.query(view, query)
           .then((results) => (ViewObject.entriesToViewObject(view.bucketName, results.rows)))
           .whenComplete(() => client.close());
         });
     });
   }
-  
+
 }

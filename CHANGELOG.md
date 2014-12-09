@@ -18,4 +18,8 @@
 * November 19, 2014 - 2am
 	* Release 0.4.2
 	* Add unit tests
-	
+* December 9, 2014 - 4pm
+  * Release 0.4.3
+  * Fix bug query
+  * Close all connexions event if an error occured
+  * Fix bugs in tests

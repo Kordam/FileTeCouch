@@ -4,12 +4,12 @@ serverList:
     portMemcached: "11211"
 
 bucketList:
-  - bucketName: "default"
+  - bucketName: "test_couchbase"
     password: ""
     bucketType: "couchbase"
   - bucketName: "beer-sample"
     password: ""
     bucketType: "couchbase"
-  - bucketName: "test_cache"
+  - bucketName: "test_memcached"
     password: ""
     bucketType: "memcached"

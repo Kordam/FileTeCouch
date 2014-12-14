@@ -22,4 +22,9 @@
   * Release 0.4.3
   * Fix bug query
   * Close all connexions event if an error occured
-  * Fix bugs in tests
+	* Fix bugs in tests
+* December 14, 2014
+  * Release 0.5.0
+  * Fix bug query (key -> keys)
+  * GetView now return a DBObject if has reduce operation
+  * Finished Unit-test

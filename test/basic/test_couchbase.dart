@@ -17,7 +17,7 @@ void test_couchbase_set() {
     DBObject set0 = new DBObject("set0", "value0", dbTtl: 10);
     var callback = expectAsync(() {});
     testBucket.set(set0).then((DBObject ret) {
-      return new Future.delayed(new Duration(seconds: 11), () {
+      return new Future.delayed(new Duration(seconds: 15), () {
         try {
           testBucket.get(set0.key).then(callback);
         } catch(e) {
@@ -110,5 +110,35 @@ void test_couchbase_delete() {
 }
 
 void test_couchbase_views() {
-  
+  CouchbaseCluster.init("config/test_couchbase_cluster.yaml");
+    FileTeCouch testBucket = new FileTeCouch("beer-sample");
+
+    test("GetView : Map AND Reduce", () {
+      var callback = expectAsync((result) {
+        expect(result is DBObject, isTrue);
+        expect((result as DBObject).value, equals(1411));
+      });
+      testBucket.getView("beer", "by_location").then(callback);
+    });
+
+    test("GetView : ONLY Map", () {
+      DBQuery query = new DBQuery();
+      query.reduce = false;
+      var callback = expectAsync((result) {
+        expect(result is List<ViewObject>, isTrue);
+        expect((result as List<ViewObject>).length, equals(1411));
+      });
+      testBucket.getViewByQuery("beer", "by_location", query).then(callback);
+    });
+
+    test("GetView : ONLY Map filtered by keys", () {
+      DBQuery query = new DBQuery();
+      query.reduce = false;
+      query.key = "42";
+      var callback = expectAsync((result) {
+        expect(result is List<ViewObject>, isTrue);
+        expect((result as List<ViewObject>).length, equals(0));
+      });
+      testBucket.getViewByQuery("beer", "by_location", query).then(callback);
+    });
 }

@@ -66,15 +66,24 @@ class BucketAccessCouchbase extends ABucketAccess {
    * Send a query to Couchbase Server for custom map/reduce algorythms
    */
   Future getView(String designDocumentName, String viewName, DBQuery query) {
+    // WTF issue -> key doesn't work here...
+    if (query != null && query.args["key"] != null) {
+      query.keys = [query.args["key"]];
+      query.key = null;
+    }
+
     return CouchbaseCluster.connect(bucket).then((CouchClient client) {
       return client.getView(designDocumentName, viewName).then((View view) {
         if (view == null) {
           throw "Unknown view";
         }
-        return client.query(view, query)
-          .then((results) => (ViewObject.entriesToViewObject(view.bucketName, results.rows)))
-          .whenComplete(() => client.close());
+        return client.query(view, query).then((ViewResponse results) {
+          if (results is ViewResponseReduced)
+            return new DBObject((results.rows.first as ViewRowReduced).key, JSON.decode((results.rows.first as ViewRowReduced).value));
+          return ViewObject.entriesToViewObject(view.bucketName, results.rows);
         });
+      })
+      .whenComplete(() => client.close());
     });
   }
 

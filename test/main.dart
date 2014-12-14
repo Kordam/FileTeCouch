@@ -25,9 +25,9 @@ void test_couchbase_config() {
 
 void test_couchbase_basic() {
   group('Basic Couchbase request tests =>', () {
-    test_couchbase_set();
+//    test_couchbase_set();
     test_couchbase_get();
-    //test_couchbase_getAll();
+    test_couchbase_getAll();
     test_couchbase_increment();
     test_couchbase_decrement();
     test_couchbase_delete();
@@ -39,7 +39,7 @@ void test_memcached_basic() {
   group('Basic Memcached request tests =>', () {
     test_memcached_set();
     test_memcached_get();
-   // test_memcached_getAll();
+//    test_memcached_getAll();      // issue in rikulo lib (github -> rikulo/memcached-client)
     test_memcached_increment();
     test_memcached_decrement();
     test_memcached_delete();

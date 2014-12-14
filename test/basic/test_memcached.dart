@@ -100,5 +100,20 @@ void test_memcached_delete() {
 }
 
 void test_memcached_views() {
-  
+  CouchbaseCluster.init("config/test_couchbase_cluster.yaml");
+  FileTeCouch testBucket = new FileTeCouch("memcached-unitTest");
+
+    test("getView", () {
+      expect(() => testBucket.getView("ddoc", "view"), throwsA(new isInstanceOf<String>()));
+      /*
+      var callback = expectAsync( (List<ViewObject> results) {
+        expect(results, throwsA(new isInstanceOf<String>()));
+      });
+      try {
+        testBucket.getView("ddoc", "view").then(callback);
+      } catch(e) {
+        callback();
+      }
+      */
+    });
 }

@@ -98,7 +98,7 @@ class FileTeCouch {
     // to retrieve the attached doc at the same time
     query.includeDocs = true;
     // filter by key (first emit argument)
-    query.key = JSON.encode(key);
+    query.key = key;
     return getViewByQuery(designDocumentName, viewName, query)
         .then( (List<ViewObject> obj) {
           List<DBObject> ret = new List<DBObject>();

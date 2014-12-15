@@ -40,8 +40,11 @@ For more information, please refer to [Pub: Dependencies]
 ##Usage
 
 
-    import "package:FileTeCouch/FileTeCouch.dart";
-    
-    void main() {
-      
-    }
+cf. examples/
+
+
+##TODO
+
+- Implement Spatial views
+
+

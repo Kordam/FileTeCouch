@@ -28,3 +28,6 @@
   * Fix bug query (key -> keys)
   * GetView now return a DBObject if has reduce operation
   * Finished Unit-test
+* December 16, 2014
+  * Release 0.5.1
+  * Update readme.md with 'TODO' section

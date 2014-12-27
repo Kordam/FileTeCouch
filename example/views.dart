@@ -1,6 +1,4 @@
-
-import "dart:async";
-import "package:FileTeCouch/FileTeCouch.dart";
+part of example;
 
 /**
  * Perform a simple map/reduce algorythm

@@ -31,6 +31,10 @@
 * December 16, 2014
   * Release 0.5.1
   * Update readme.md with 'TODO' section
-* January 25, 2014
+* January 25, 2014 - 5pm
   * Release 0.6.0
   * Support Sasl authentification on memcached buckets
+* January 25, 2014 - 10pm
+  * Release 0.6.1
+  * Query : in Couchbase Server 3.0 inclusiveEnd is not true in the default behavior
+  * Updated getDocumentsByViewResultKey function

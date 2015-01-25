@@ -45,6 +45,6 @@ cf. examples/
 
 ##TODO
 
-- Implement Spatial views
-
+* Implement Spatial views
+* Write a better README ;-)
 

@@ -9,8 +9,11 @@ environment:
   sdk: '>=1.7.2'
 documentation: https://github.com/Kordam/FileTeCouch
 dependencies:
-  couchclient: any
-  memcached_client: any
+  couchclient:
+    git: https://github.com/samber/couchclient.git
+  memcached_client:
+    git: https://github.com/samber/memcached-client.git
+    version: '>=0.5.5'
   yaml: 1.1.1
 dev_dependencies:
   unittest: any

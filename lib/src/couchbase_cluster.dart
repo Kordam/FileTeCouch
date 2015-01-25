@@ -103,7 +103,8 @@ class CouchbaseCluster {
     return (CouchClient.connect(_listServersCouchbase, bucket, _listBuckets[bucket]["password"]));
   }
   static Future _connectMemcachedBucket(String bucket) {
-    return (MemcachedClient.connect(_listServersMemcached));
+    var factory = new SaslBinaryConnectionFactory(bucketName: bucket, password: _listBuckets[bucket]["password"]);
+    return (MemcachedClient.connect(_listServersMemcached, factory: factory));
   }
   
   

@@ -99,6 +99,7 @@ class FileTeCouch {
     query.includeDocs = true;
     // filter by key (first emit argument)
     query.key = key;
+    query.inclusiveEnd = true;	// not default value since Couchbase Server 3.0 -> https://forums.couchbase.com/t/unable-to-query-a-view-by-key-on-3-0-0-on-macos/1783/6
     return getViewByQuery(designDocumentName, viewName, query)
         .then( (List<ViewObject> obj) {
           List<DBObject> ret = new List<DBObject>();

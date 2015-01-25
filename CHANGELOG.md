@@ -32,4 +32,5 @@
   * Release 0.5.1
   * Update readme.md with 'TODO' section
 * January 25, 2014
+  * Release 0.6.0
   * Support Sasl authentification on memcached buckets

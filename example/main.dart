@@ -7,7 +7,7 @@ import "views.dart";
 void main() {
 
   // don't forget to declare you own configuration in the .yaml file here :
-  CouchbaseCluster.init("couchbase_cluster.yaml");
+  CouchbaseCluster.init("couchbase_cluster.yaml", null);
   FileTeCouch couchbaseBucket = new FileTeCouch("test_couchbase");
   FileTeCouch beerBucket = new FileTeCouch("beer-sample");
   FileTeCouch memcachedBucket = new FileTeCouch("test_memcached");

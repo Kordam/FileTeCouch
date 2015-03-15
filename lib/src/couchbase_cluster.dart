@@ -16,8 +16,8 @@ class CouchbaseCluster {
   
   
   
-  static void init(filename) {
-    _getConfiguration(filename);
+  static void init(String filename, Map<String, Object> config) {
+    _getConfiguration(filename, config);
     ready = true;
   }
 
@@ -25,13 +25,17 @@ class CouchbaseCluster {
   
   
   // load the couchbase cluster configuration
-  static void _getConfiguration(String filename) {
-    // open and read the file
-    var file = new File(filename);
-    String content = file.readAsStringSync(encoding: ASCII);
+  static void _getConfiguration(String filename, Map list) {
+
+    if (filename != null && list != null) {
+      // open and read the file
+      var file = new File(filename);
+      String content = file.readAsStringSync(encoding: ASCII);
+      
+      // parse the configuration file
+      list = loadYaml(content);
+    }
     
-    // parse the configuration file
-    var list = loadYaml(content);
     if (list == null)
       throw "Bad couchbase configuration file";
     if (list['serverList'] == null || list['serverList'][0] == null)

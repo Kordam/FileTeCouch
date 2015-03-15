@@ -1,6 +1,4 @@
-
-import "dart:async";
-import "package:FileTeCouch/FileTeCouch.dart";
+part of example;
 
 /**
  * Set a values, get and print

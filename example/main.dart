@@ -1,8 +1,10 @@
+library example;
 
-import "package:FileTeCouch/FileTeCouch.dart";
+import 'dart:async';
+import 'package:FileTeCouch/FileTeCouch.dart';
 
-import "simple.dart";
-import "views.dart";
+part 'simple.dart';
+part 'views.dart';
 
 void main() {
 
